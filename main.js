@@ -36,7 +36,10 @@ function get_date() {
 const HEBREW_LETTERS = "אבגדהוזחטיכלמנסעפצקרשתךםןףץ";
 const HEBREW_KEYBOARD = "tcdsvuzjyhfknbxgpmera,loi;.";
 let today = get_date();
-let word_of_the_day = WORDS[cyrb53('meduyeket ' + today) % WORDS.length];
+let word_of_the_day =
+    today === '15.1.2022'
+        ? 'כימאי'
+        : FREQUENT_WORDS[cyrb53('meduyeket ' + today) % FREQUENT_WORDS.length];
 let guesses = [];
 
 
