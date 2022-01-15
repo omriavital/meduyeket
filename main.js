@@ -326,7 +326,7 @@ function load_from_local_storage() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // load_from_local_storage();
+    load_from_local_storage();
     save_to_local_storage();
     document.getElementById('help-button').addEventListener('click', show_help);
     document.getElementById('share-button').addEventListener('click', copy_result);
