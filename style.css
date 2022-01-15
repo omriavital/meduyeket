@@ -79,8 +79,8 @@ body {
     animation: grow 2000ms ease-in-out 0ms 2 alternate;
 }
 @keyframes grow {
-    0% {width: calc(min(15vw, 9vh)); height: calc(min(15vw, 9vh)); margin: calc(min(0.5vw, 0.3vh));}
-    100% {width: calc(min(20vw, 12vh)); height: calc(min(20vw, 12vh)); margin: calc(min(0.5vw, 0.3vh)) calc(max(-1.5vw, -0.9vh));;}
+    0% {transform: none;}
+    100% {transform: scale(1.5, 1.5);}
 }
 .letter {
     width: calc(min(15vw, 9vh));
