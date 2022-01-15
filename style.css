@@ -38,16 +38,9 @@ body {
     font-family: Arimo, Arial, sans-serif;
 }
 
-#app {
-    width: 120mm;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
 #header {
-    width: calc(min(120mm, 100vw));
-    padding: 1mm;
+    width: calc(min(100vw, 60vh));
+    padding: calc(min(1vw, 0.6vh));
     border-bottom: 1px solid lightgray;
     text-align: center;
     position: relative;
@@ -55,12 +48,12 @@ body {
 #help-button {
     cursor: pointer;
     position: absolute;
-    left: 4mm;
-    top: 5mm;
-    height: 5mm;
+    left: calc(min(3vw, 1.8vh));
+    top: calc(min(4vw, 2.4vh));
+    height: calc(min(4vw, 2.4vh));
 }
 #app-name {
-    font-size: 10mm;
+    font-size: calc(min(9vw, 5.4vh));
     font-weight: bold;
 }
 
@@ -77,41 +70,41 @@ body {
     animation: jiggle 200ms ease-in-out 0ms 2;
 }
 @keyframes jiggle {
-    0% {transform: translateX(0mm);}
-    25% {transform: translateX(1mm);}
-    75% {transform: translateX(-1mm);}
-    100% {transform: translateX(0mm);}
+    0% {transform: translateX(0);}
+    25% {transform: translateX(calc(min(0.5vw, 0.3vh)));}
+    75% {transform: translateX(calc(max(-0.5vw, -0.3vh)));}
+    100% {transform: translateX(0);}
 }
 .row.win > .letter {
     animation: grow 2000ms ease-in-out 0ms 2 alternate;
 }
 @keyframes grow {
-    0% {width: calc(min(8vh, 17mm)); height: calc(min(8vh, 17mm))}
-    100% {width: calc(min(10vh, 20mm)); height: calc(min(10vh, 20mm))}
+    0% {width: calc(min(15vw, 9vh)); height: calc(min(15vw, 9vh)); margin: calc(min(0.5vw, 0.3vh));}
+    100% {width: calc(min(18vw, 10.8vh)); height: calc(min(18vw, 10.8vh)); margin: calc(max(-0.1vw, -0.06vh));;}
 }
 .letter {
-    width: calc(min(8vh, 17mm));
-    height: calc(min(8vh, 17mm));
-    margin: 0.7mm;
+    width: calc(min(15vw, 9vh));
+    height: calc(min(15vw, 9vh));
+    margin: calc(min(0.5vw, 0.3vh));
     border: 2px solid lightgray;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(min(5vh, 10mm));
+    font-size: calc(min(10vw, 6vh));
     font-weight: bold;
     transition: 300ms;
 }
 .letter.example {
-    width: 10mm;
-    height: 10mm;
-    margin: 1mm 0 0 0;
-    font-size: 6mm;
+    width: calc(min(8vw, 4.8vh));
+    height: calc(min(8vw, 4.8vh));
+    margin: calc(min(0.4vw, 0.24vh)) 0 0 0;
+    font-size: calc(min(5vw, 3vh));
     font-weight: bold;
     transition: 600ms;
 }
 .letter.full {
-    border: 0.75mm solid gray;
+    border: 2px solid gray;
 }
 .letter.exact, .letter.other, .letter.wrong {
     color: white;
@@ -128,7 +121,7 @@ body {
 }
 
 #keyboard {
-    margin-bottom: 2mm;
+    margin-bottom: calc(min(3vw, 1.8vh));
 }
 .keyboard-row {
     display: flex;
@@ -136,15 +129,15 @@ body {
 }
 .key {
     display: inline-block;
-    width: calc(min(9vw, 9mm));
-    height: calc(min(13vw, 13mm));
-    border-radius: 1mm;
-    margin: calc(min(0.7vw, 0.7mm)) calc(min(0.3vw, 0.5mm));
+    width: calc(min(7vw, 4.2vh));
+    height: calc(min(9vw, 5.4vh));
+    border-radius: calc(min(0.5vw, 0.3vh));
+    margin: calc(min(0.7vw, 0.42vh)) calc(min(0.4vw, 0.24vh));
     background-color: lightgray;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(min(6vw, 6mm));
+    font-size: calc(min(5vw, 3vh));
     font-weight: bold;
 }
 .key[match="exact"], .key[match="other"], .key[match="wrong"] {
@@ -160,22 +153,23 @@ body {
     background-color: gray;
 }
 .key.wide {
-    width: calc(min(12vw, 12mm));
+    width: calc(min(12vw, 7.2vh));
 }
 .key > svg {
-    height: calc(min(6vw, 6mm));
+    height: calc(min(4vw, 2.4vh));
 }
 .keyboard-row:nth-child(2) > .key:first-child {
-    margin-right: calc(min(8vw, 8mm));
+    margin-right: calc(min(7vw, 4.2vh));
 }
 
 #popup {
     position: fixed;
-    top: 2cm;
-    padding: 0.5cm;
-    border-radius: 1mm;
+    top: calc(min(15vw, 9vh));
+    padding: calc(min(3vw, 1.8vh));
+    border-radius: calc(min(1vw, 0.6vh));
     background-color: black;
     color: white;
+    font-size: calc(min(4vw, 2.4vh));
 }
 #popup.hidden {
     transition: 400ms;
@@ -194,10 +188,24 @@ body {
 #modal.hidden {
     display: none;
 }
+#modal > div {
+    width: calc(min(90vw, 54vh));
+    max-height: 90%;
+    padding: calc(min(2vw, 1.2vh)) calc(min(3vw, 2.4vh)) calc(min(3vw, 2.4vh)) calc(min(3vw, 2.4vh));
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: calc(min(2vw, 1.2vh));
+    box-shadow: 0 0 calc(min(5vw, 3vh)) gray;
+    font-size: calc(min(3.5vw, 2.16vh));
+}
+#modal > div.hidden {
+    display: none;
+}
 .close-button {
     float: left;
-    margin-left: 1mm;
-    margin-top: 3mm;
+    margin-left: calc(min(1vw, 0.6vh));
+    margin-top: calc(min(2vw, 1.2vh));
     color: gray;
 }
 h1 {
@@ -206,38 +214,25 @@ h1 {
 }
 h2 {
     border-top: 1px solid lightgray;
-    margin-top: 1mm;
-    padding-top: 4mm;
+    margin-top: calc(min(1vw, 0.6vh));
+    padding-top: calc(min(4vw, 2.4vh));
     font-size: 1.1em;
-}
-#modal > div {
-    width: calc(min(90vw, 130mm));
-    max-height: 90%;
-    padding: 3mm 4mm 4mm 4mm;
-    box-sizing: border-box;
-    overflow-y: auto;
-    background-color: white;
-    border-radius: 2mm;
-    box-shadow: 0 0 5mm gray;
-}
-#modal > div.hidden {
-    display: none;
 }
 #help-screen a {
     font-weight: bold;
 }
 #copyright-notice {
-    margin-top: 10mm;
+    margin-top: calc(min(10vw, 6vh));
 }
 #success-screen-bottom {
-    margin-top: 5mm;
-    height: 22mm;
+    margin-top: calc(min(5vw, 3vh));
+    height: calc(min(20vw, 12vh));
     display: flex;
     flex-direction: row;
 }
 #copy-button-container {
     flex-grow: 1;
-    padding-left: 3mm;
+    padding-left: calc(min(3vw, 1ץ8vh));
     border-left: 1px solid black;
     display: flex;
     justify-content: center;
@@ -250,28 +245,28 @@ h2 {
     align-items: center;
     background-color: limegreen;
     color: white;
-    height: 12mm;
-    width: 35mm;
-    border-radius: 2mm;
-    font-size: 6mm;
+    height: calc(min(10vw, 6vh));
+    width: calc(min(25vw, 15vh));
+    border-radius: calc(min(1vw, 0.6vh));
+    font-size: calc(min(5vw, 3vh));
     font-weight: 600;
 }
 #copy-button > svg {
-    height: 7mm;
-    margin-left: 2mm;
+    height: calc(min(5vw, 3vh));
+    margin-left: calc(min(2vw, 1.2vh));
 }
 #countdown-container {
     flex-grow: 1;
-    padding-right: 3mm;
+    padding-right: calc(min(3vw, 1.8vh));
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 #countdown-description {
-    font-size: calc(min(4.5vw, 4.5mm));
-    margin: 2mm;
+    font-size: 1.2em;
+    margin: calc(min(2vw, 1.2vh));
 }
 #countdown {
-    font-size: 10mm;
+    font-size: calc(min(8vw, 4.8vh));
 }
