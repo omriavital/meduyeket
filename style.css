@@ -263,22 +263,19 @@ h2 {
     font-size: calc(min(3.5vw, 2.1vh));
     font-weight: normal;
     padding: calc(min(2vw, 1.2vh));
-    border-radius: calc(min(2vw, 1.2vh));
+    border-radius: calc(min(1vw, 0.6vh));
 }
 #countdown-container {
     border-top: 1px solid gray;
     padding-right: calc(min(3vw, 1.8vh));
-    padding-top: calc(min(3vw, 1.8vh));
+    padding-top: calc(min(5vw, 3vh));
     margin-top: calc(min(5vw, 3vh));
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-#countdown-description {
-    font-size: 1.2em;
-    margin: calc(min(2vw, 1.2vh));
-}
 #countdown {
+    margin-top: calc(min(2vw, 1.2vh));
     font-size: calc(min(8vw, 4.8vh));
 }

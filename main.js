@@ -113,8 +113,16 @@ function show_success_screen() {
 }
 
 function copy_result(event) {
-    navigator.clipboard.writeText(document.getElementById('result').innerText);
-    popup('התוצאה הועתקה, אפשר להדביק עם Ctrl+V')
+    const RTL_MARK = '\u200f';
+    const rows = guesses.map(function(guess) {
+        return RTL_MARK + get_matches(guess, word_of_the_day).map(function(match) {
+            return {exact: '🟩', other: '🟨', wrong: '⬜'}[match];
+        }).join('');
+    });
+    const result = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n\n` + rows.join('\n');
+
+    navigator.clipboard.writeText(result);
+    popup('התוצאה הועתקה, אפשר להדביק עם Ctrl+V');
     event.stopPropagation();
 }
 
@@ -340,5 +348,5 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('popstate', set_modal_state);
 });
 
-console.log('While debugging, the following command clears the saved guesses:')
-console.log('localStorage.setItem("guesses", "[]")')
+// console.log('While debugging, the following command clears the saved guesses:')
+// console.log('localStorage.setItem("guesses", "[]")')
