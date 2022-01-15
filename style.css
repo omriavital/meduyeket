@@ -129,9 +129,9 @@ body {
 }
 .key {
     display: inline-block;
-    width: calc(min(7vw, 4.2vh));
-    height: calc(min(9vw, 5.4vh));
-    border-radius: calc(min(0.5vw, 0.3vh));
+    width: calc(min(8.5vw, 5.1vh));
+    height: calc(min(12vw, 7.2vh));
+    border-radius: calc(min(1vw, 0.5vh));
     margin: calc(min(0.7vw, 0.42vh)) calc(min(0.4vw, 0.24vh));
     background-color: lightgray;
     display: inline-flex;
