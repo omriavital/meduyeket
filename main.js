@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function () {
     load_from_local_storage();
     save_to_local_storage();
     document.getElementById('help-button').addEventListener('click', show_help);
-    document.getElementById('copy-button').addEventListener('click', copy_result);
+    document.getElementById('share-button').addEventListener('click', copy_result);
     document.getElementById('modal').addEventListener('click', hide_modal);
     document.body.addEventListener('keydown', function(event) {
         if (event.ctrlKey || event.altKey)
