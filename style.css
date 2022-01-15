@@ -50,7 +50,7 @@ body {
     position: absolute;
     left: calc(min(3vw, 1.8vh));
     top: calc(min(4vw, 2.4vh));
-    height: calc(min(4vw, 2.4vh));
+    height: calc(min(5vw, 3vh));
 }
 #app-name {
     font-size: calc(min(9vw, 5.4vh));
@@ -156,7 +156,7 @@ body {
     width: calc(min(12vw, 7.2vh));
 }
 .key > svg {
-    height: calc(min(4vw, 2.4vh));
+    width: calc(min(6vw, 3.6vh));
 }
 .keyboard-row:nth-child(2) > .key:first-child {
     margin-right: calc(min(7vw, 4.2vh));
@@ -220,6 +220,14 @@ h2 {
 }
 #help-screen a {
     font-weight: bold;
+}
+#help-screen svg {
+    display: inline;
+    height: calc(min(4vw, 2.4vh));
+    transform: translateY(calc(min(1vw, 0.5vh)));
+}
+.no-break {
+    white-space: nowrap;
 }
 #copyright-notice {
     margin-top: calc(min(10vw, 6vh));

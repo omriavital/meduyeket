@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="style.css">
     <script src="words.js" charset="UTF-8"></script>
     <script src="main.js" charset="UTF-8"></script>
-    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9BNSJSTY61"></script>
     <script>
-        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-        ga('create', 'G-9BNSJSTY61', { cookieFlags: 'SameSite=None; Secure' });
-        ga('send', 'pageview');
-        </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- End Google Analytics -->
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9BNSJSTY61', { cookieFlags: 'SameSite=None; Secure' });
+    </script>
 </head>
 <!--
     A word guessing game inspired by Wordle
@@ -35,7 +36,7 @@
 -->
 <body>
         <div id="header">
-            <svg id="help-button" viewbox="0 0 105 100">
+            <svg id="help-button" viewbox="0 0 105 105">
                 <path
                     d="M 34 35 A 16 12.5 0 1 1 59.6 45 A 24 18.75 0 0 0 50 60"
                     stroke-width="10" stroke-linecap="round" fill="none" stroke="gray" />
@@ -134,7 +135,14 @@
             <div class="close-button">⨉</div>
             <h1>איך לשחק?</h1>
             <p>נסו לנחש את המילה ה<b>מדויקת</b>, יש 6 נסיונות.</p>
-            <p>כל ניחוש חייב להיות מילה בת 5 אותיות.</p>
+            <p>
+                כל ניחוש חייב להיות מילה בת 5 אותיות.
+                לחצו על כפתור
+                <span class="no-break">”<svg viewBox="0 0 65 50">
+                    <path d="M55,15L55,30L10,30L20,20M10,30L20,40" fill="none" stroke-width="5" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>“</span>
+                כדי לבדוק את הניחוש.
+            </p>
             <p>לאחר כל ניחוש, צבע האותיות ישתנה כדי להראות כמה הניחוש היה קרוב למילה.</p>
             <h2>דוגמאות</h2>
             <p>

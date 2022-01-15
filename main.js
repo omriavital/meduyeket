@@ -63,27 +63,53 @@ function get_matches(guess, truth) {
     return matches;
 }
 
+function set_modal_state() {
+    switch (history.state) {
+        case 'help':
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('help-screen').classList.remove('hidden');
+            document.getElementById('help-screen').scrollTop = 0;
+            document.getElementById('success-screen').classList.add('hidden');
+            break;
+
+        case 'success':
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('help-screen').classList.add('hidden');
+            document.getElementById('success-screen').classList.remove('hidden');
+            document.getElementById('success-header').innerText =
+                guesses[guesses.length - 1] === word_of_the_day ? 'כל הכבוד!' : 'לא הצליח הפעם';
+
+            const rows = guesses.map(function(guess) {
+                return get_matches(guess, word_of_the_day).map(function(match) {
+                    return {exact: '🟩', other: '🟨', wrong: '⬜'}[match];
+                }).join('');
+            });
+            document.getElementById('result').innerText = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n` + rows.join('\n');
+            countdown();
+            break;
+
+        default:
+            document.getElementById('modal').classList.add('hidden');
+    }
+}
 function show_help() {
-    document.getElementById('modal').classList.remove('hidden');
-    document.getElementById('help-screen').classList.remove('hidden');
-    document.getElementById('help-screen').scrollTop = 0;
-    document.getElementById('success-screen').classList.add('hidden');
+    if (history.state !== 'help') {
+        if (history.state === 'success')
+            history.replaceState('help', '');
+        else
+            history.pushState('help', '');
+    }
+    set_modal_state();
 }
 
 function show_success_screen() {
-    document.getElementById('modal').classList.remove('hidden');
-    document.getElementById('help-screen').classList.add('hidden');
-    document.getElementById('success-screen').classList.remove('hidden');
-    document.getElementById('success-header').innerText =
-        guesses[guesses.length - 1] === word_of_the_day ? 'כל הכבוד!' : 'לא הצליח הפעם';
-
-    const rows = guesses.map(function(guess) {
-        return get_matches(guess, word_of_the_day).map(function(match) {
-            return {exact: '🟩', other: '🟨', wrong: '⬜'}[match];
-        }).join('');
-    });
-    document.getElementById('result').innerText = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n` + rows.join('\n');
-    countdown();
+    if (history.state !== 'success') {
+        if (history.state === 'help')
+            history.replaceState('success', '');
+        else
+            history.pushState('success', '');
+    }
+    set_modal_state();
 }
 
 function copy_result(event) {
@@ -116,7 +142,9 @@ function two_digits(x) {
 }
 
 function hide_modal() {
-    document.getElementById('modal').classList.add('hidden');
+    if (history.state === 'help' || history.state === 'success')
+        history.back();
+    set_modal_state();
 }
 
 function popup(text) {
@@ -308,6 +336,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     for (const elt of document.getElementsByClassName('key'))
         elt.addEventListener('click', handle_on_screen_keyboard_click);
+    set_modal_state();
+    window.addEventListener('popstate', set_modal_state);
 });
 
 console.log('While debugging, the following command clears the saved guesses:')
