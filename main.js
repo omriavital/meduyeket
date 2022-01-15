@@ -135,7 +135,12 @@ function countdown() {
     if (document.getElementById('success-screen').classList.contains('hidden'))
         return;
 
-    const time_str = new Date().toLocaleTimeString('he-IL', {timeZone: 'Asia/Jerusalem', hourCycle: 'h24'});
+    if (get_date() !== today) {
+        document.getElementById('countdown').innerText = '0:00:00';
+        return;
+    }
+
+    const time_str = new Date().toLocaleTimeString('he-IL', {timeZone: 'Asia/Jerusalem', hourCycle: 'h23'});
     const [hours, minutes, seconds] = time_str.split(':').map(function(x) {return parseInt(x);});
     const since_midnight = 3600 * hours + 60 * minutes + seconds;
     const to_midnight = 3600 * 24 - since_midnight;
