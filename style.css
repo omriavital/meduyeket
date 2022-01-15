@@ -1,0 +1,269 @@
+/*
+    A word guessing game inspired by Wordle
+    Copyright (C) 2022  Amir Livne Bar-on
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+@font-face {
+    font-family: Arimo;
+    src: url(Arimo-VariableFont_wght.ttf);
+}
+
+html {
+    touch-action: none;
+    user-select: none;
+    direction: rtl;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arimo, Arial, sans-serif;
+}
+
+#app {
+    width: 120mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#header {
+    width: calc(min(120mm, 100vw));
+    padding: 1mm;
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    position: relative;
+}
+#help-button {
+    cursor: pointer;
+    position: absolute;
+    left: 4mm;
+    top: 5mm;
+    height: 5mm;
+}
+#app-name {
+    font-size: 10mm;
+    font-weight: bold;
+}
+
+#guesses {
+    display: flex;
+    flex-direction: column;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.row.jiggle {
+    animation: jiggle 200ms ease-in-out 0ms 2;
+}
+@keyframes jiggle {
+    0% {transform: translateX(0mm);}
+    25% {transform: translateX(1mm);}
+    75% {transform: translateX(-1mm);}
+    100% {transform: translateX(0mm);}
+}
+.letter {
+    width: 17mm;
+    height: 17mm;
+    margin: 0.7mm;
+    border: 2px solid lightgray;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10mm;
+    font-weight: bold;
+    transition: 300ms;
+}
+.letter.example {
+    width: 10mm;
+    height: 10mm;
+    margin: 1mm 0 0 0;
+    font-size: 6mm;
+    font-weight: bold;
+    transition: 600ms;
+}
+.letter.full {
+    border: 0.75mm solid gray;
+}
+.letter.exact, .letter.other, .letter.wrong {
+    color: white;
+    border: none;
+}
+.letter.exact {
+    background-color: limegreen;
+}
+.letter.other {
+    background-color: sandybrown;
+}
+.letter.wrong {
+    background-color: gray;
+}
+
+#keyboard {
+    margin-bottom: 2mm;
+}
+.keyboard-row {
+    display: flex;
+    flex-direction: row;
+}
+.key {
+    display: inline-block;
+    width: calc(min(9vw, 9mm));
+    height: calc(min(13vw, 13mm));
+    border-radius: 1mm;
+    margin: calc(min(0.7vw, 0.7mm)) calc(min(0.3vw, 0.5mm));
+    background-color: lightgray;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(min(6vw, 6mm));
+    font-weight: bold;
+}
+.key[match="exact"], .key[match="other"], .key[match="wrong"] {
+    color: white;
+}
+.key[match="exact"] {
+    background-color: limegreen;
+}
+.key[match="other"] {
+    background-color: sandybrown;
+}
+.key[match="wrong"] {
+    background-color: gray;
+}
+.key.wide {
+    width: calc(min(12vw, 12mm));
+}
+.key > svg {
+    height: calc(min(6vw, 6mm));
+}
+.keyboard-row:nth-child(2) > .key:first-child {
+    margin-right: calc(min(8vw, 8mm));
+}
+
+#popup {
+    position: fixed;
+    top: 2cm;
+    padding: 0.5cm;
+    border-radius: 1mm;
+    background-color: black;
+    color: white;
+}
+#popup.hidden {
+    transition: 400ms;
+    opacity: 0;
+}
+
+#modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#modal.hidden {
+    display: none;
+}
+.close-button {
+    float: left;
+    margin-left: 1mm;
+    margin-top: 3mm;
+    color: gray;
+}
+h1 {
+    text-align: center;
+    font-size: 1.2em;
+}
+h2 {
+    border-top: 1px solid lightgray;
+    margin-top: 1mm;
+    padding-top: 4mm;
+    font-size: 1.1em;
+}
+#modal > div {
+    width: calc(min(90vw, 130mm));
+    padding: 3mm 4mm 4mm 4mm;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 2mm;
+    box-shadow: 0 0 5mm gray;
+}
+#modal > div.hidden {
+    display: none;
+}
+#help-screen a {
+    font-weight: bold;
+}
+#copyright-notice {
+    margin-top: 10mm;
+}
+#success-screen-bottom {
+    margin-top: 5mm;
+    height: 22mm;
+    display: flex;
+    flex-direction: row;
+}
+#copy-button-container {
+    flex-grow: 1;
+    padding-left: 3mm;
+    border-left: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#copy-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: limegreen;
+    color: white;
+    height: 12mm;
+    width: 35mm;
+    border-radius: 2mm;
+    font-size: 6mm;
+    font-weight: 600;
+}
+#copy-button > svg {
+    height: 7mm;
+    margin-left: 2mm;
+}
+#countdown-container {
+    flex-grow: 1;
+    padding-right: 3mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#countdown-description {
+    font-size: calc(min(4.5vw, 4.5mm));
+    margin: 2mm;
+}
+#countdown {
+    font-size: 10mm;
+}
