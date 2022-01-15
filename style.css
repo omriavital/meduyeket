@@ -82,6 +82,13 @@ body {
     75% {transform: translateX(-1mm);}
     100% {transform: translateX(0mm);}
 }
+.row.win > .letter {
+    animation: grow 2000ms ease-in-out 0ms 2 alternate;
+}
+@keyframes grow {
+    0% {width: 17mm; height: 17mm}
+    100% {width: 20mm; height: 20mm}
+}
 .letter {
     width: 17mm;
     height: 17mm;

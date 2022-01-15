@@ -184,9 +184,11 @@ function make_guess() {
     save_to_local_storage();
     if (guess === word_of_the_day) {
         add_result_to_local_storage();
+        const row_elt = document.getElementById(`guess-${row}`);
+        row_elt.classList.add('win');
         const CONGRATULATIONS = ['גאוני', 'מדהים', 'נפלא', 'סחתיין', 'נהדר', 'מקסים'];
         popup(CONGRATULATIONS[guesses.length - 1]);
-        window.setTimeout(show_success_screen, 2000);
+        window.setTimeout(show_success_screen, 3600);
     } else {
         window.setTimeout(set_keyboard_key_colors, 100);
         if (guesses.length === 6) {
