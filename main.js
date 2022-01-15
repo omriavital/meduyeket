@@ -84,7 +84,7 @@ function set_modal_state() {
                     return {exact: '🟩', other: '🟨', wrong: '⬜'}[match];
                 }).join('');
             });
-            document.getElementById('result').innerText = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n` + rows.join('\n');
+            document.getElementById('result').innerText = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n\n` + rows.join('\n');
             countdown();
             break;
 
