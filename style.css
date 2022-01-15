@@ -205,6 +205,7 @@ h2 {
 }
 #modal > div {
     width: calc(min(90vw, 130mm));
+    max-height: 90%;
     padding: 3mm 4mm 4mm 4mm;
     box-sizing: border-box;
     overflow-y: auto;
