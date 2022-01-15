@@ -97,7 +97,7 @@ body {
 .letter.example {
     width: calc(min(8vw, 4.8vh));
     height: calc(min(8vw, 4.8vh));
-    margin: calc(min(0.4vw, 0.24vh)) 0 0 0;
+    margin: calc(min(0.5vw, 0.4vh)) 0 calc(max(-0.5vw, -0.4vh)) 0;
     font-size: calc(min(5vw, 3vh));
     font-weight: bold;
     transition: 600ms;
