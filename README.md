@@ -8,4 +8,4 @@
 
 ## נסו את המשחק!
 
-[<img src="screenshot.png">](https://amirlb.github.io/meduyeket/)
+[<p align="center"><img src="screenshot.png"></p>](https://amirlb.github.io/meduyeket/)
