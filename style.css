@@ -80,7 +80,7 @@ body {
 }
 @keyframes grow {
     0% {width: calc(min(15vw, 9vh)); height: calc(min(15vw, 9vh)); margin: calc(min(0.5vw, 0.3vh));}
-    100% {width: calc(min(18vw, 10.8vh)); height: calc(min(18vw, 10.8vh)); margin: calc(max(-0.1vw, -0.06vh));;}
+    100% {width: calc(min(20vw, 12vh)); height: calc(min(20vw, 12vh)); margin: calc(min(0.5vw, 0.3vh)) calc(max(-1.5vw, -0.9vh));;}
 }
 .letter {
     width: calc(min(15vw, 9vh));
