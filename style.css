@@ -264,6 +264,8 @@ h2 {
     font-weight: normal;
     padding: calc(min(2vw, 1.2vh));
     border-radius: calc(min(1vw, 0.6vh));
+    white-space: pre;
+    user-select: text;
 }
 #countdown-container {
     border-top: 1px solid gray;

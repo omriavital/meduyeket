@@ -79,12 +79,13 @@ function set_modal_state() {
             document.getElementById('success-header').innerText =
                 guesses[guesses.length - 1] === word_of_the_day ? 'כל הכבוד!' : 'לא הצליח הפעם';
 
+            const RTL_MARK = '\u200f';
             const rows = guesses.map(function(guess) {
-                return get_matches(guess, word_of_the_day).map(function(match) {
+                return RTL_MARK + get_matches(guess, word_of_the_day).map(function(match) {
                     return {exact: '🟩', other: '🟨', wrong: '⬜'}[match];
                 }).join('');
             });
-            document.getElementById('result').innerText = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n\n` + rows.join('\n');
+            document.getElementById('result').innerHTML = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n\n` + rows.join('\n');
             countdown();
             break;
 
@@ -113,17 +114,10 @@ function show_success_screen() {
 }
 
 function copy_result(event) {
-    const RTL_MARK = '\u200f';
-    const rows = guesses.map(function(guess) {
-        return RTL_MARK + get_matches(guess, word_of_the_day).map(function(match) {
-            return {exact: '🟩', other: '🟨', wrong: '⬜'}[match];
-        }).join('');
-    });
-    const result = `מדויקת ${today} - ${guesses[guesses.length - 1] === word_of_the_day ? guesses.length : 'X'}/6\n\n` + rows.join('\n');
-
-    navigator.clipboard.writeText(result);
-    popup('התוצאה הועתקה, אפשר להדביק עם Ctrl+V');
     event.stopPropagation();
+    navigator.clipboard.writeText(document.getElementById('result').innerHTML)
+        .then(function() {popup('התוצאה הועתקה, אפשר להדביק עם Ctrl+V');})
+        .catch(function() {popup('לא עבד, נסו לסמן את הטקסט ולהעתיק');});
 }
 
 function countdown() {
