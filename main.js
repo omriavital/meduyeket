@@ -33,14 +33,35 @@ function get_date() {
     return new Date().toLocaleDateString('he-IL', {timeZone: 'Asia/Jerusalem'});
 }
 
-const HEBREW_LETTERS = "אבגדהוזחטיכלמנסעפצקרשתךםןףץ";
-const HEBREW_KEYBOARD = "tcdsvuzjyhfknbxgpmera,loi;.";
-let today = get_date();
-let word_of_the_day = FREQUENT_WORDS[cyrb53('meduyeket ' + today) % FREQUENT_WORDS.length];
+const HEBREW_KEYMAP = {
+    'e': 'ק', 'ק': 'ק', 'r': 'ר', 'ר': 'ר', 't': 'א', 'א': 'א', 'y': 'ט', 'ט': 'ט',
+    'u': 'ו', 'ו': 'ו', 'i': 'נ', 'ן': 'נ', 'o': 'מ', 'ם': 'מ', 'p': 'פ', 'פ': 'פ',
+    'a': 'ש', 'ש': 'ש', 's': 'ד', 'ד': 'ד', 'd': 'ג', 'ג': 'ג', 'f': 'כ', 'כ': 'כ',
+    'g': 'ע', 'ע': 'ע', 'h': 'י', 'י': 'י', 'j': 'ח', 'ח': 'ח', 'k': 'ל', 'ל': 'ל',
+    'l': 'כ', 'ך': 'כ', ';': 'פ', 'ף': 'פ', 'z': 'ז', 'ז': 'ז', 'x': 'ס', 'ס': 'ס',
+    'c': 'ב', 'ב': 'ב', 'v': 'ה', 'ה': 'ה', 'b': 'נ', 'נ': 'נ', 'n': 'מ', 'מ': 'מ',
+    'm': 'צ', 'צ': 'צ', ',': 'ת', 'ת': 'ת', '.': 'צ', 'ץ': 'צ'
+};
+const FINAL_LETTERS = {'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ'};
+const FINALED_LETTERS = {'כ': 'ך', 'מ': 'ם', 'נ': 'ן', 'פ': 'ף', 'צ': 'ץ'};
+const today = get_date();
+const word_of_the_day = FREQUENT_WORDS[cyrb53('meduyeket ' + today) % FREQUENT_WORDS.length];
 let guesses = [];
 
 
+function un_finalize(word) {
+    return Array.from(word).map(function(letter) {
+        if (FINAL_LETTERS.hasOwnProperty(letter))
+            return FINAL_LETTERS[letter];
+        else
+            return letter;
+    }).join('');
+}
+
 function get_matches(guess, truth) {
+    guess = un_finalize(guess);
+    truth = un_finalize(truth);
+
     const not_exact_matches = [];
     for (let i = 0; i < 5; i++)
         if (guess[i] !== truth[i])
@@ -175,7 +196,17 @@ function type_letter(letter) {
         const elt = document.getElementById(`letter-${row}-${i}`);
         if (elt.innerText === '') {
             elt.classList.add('full');
-            elt.innerText = letter;
+            if (i === 5 && FINALED_LETTERS.hasOwnProperty(letter)) {
+                let previous = '';
+                for (let j = 1; j <= 4; j++)
+                    previous += document.getElementById(`letter-${row}-${j}`).innerText;
+                if (WORDS.indexOf(previous + letter) !== -1)
+                    elt.innerText = letter;
+                else
+                    elt.innerText = FINALED_LETTERS[letter];
+            }
+            else
+                elt.innerText = letter;
             break;
         }
     }
@@ -257,12 +288,9 @@ function set_keyboard_key_colors() {
             }
         }
     }
-    for (const elt of document.getElementsByClassName('key')) {
-        const letter = elt.innerText;
-        if (letter.length === 1 && HEBREW_LETTERS.indexOf(letter) !== -1) {
-            elt.setAttribute('match', letter_states[letter]);
-        }    
-    }
+    for (const elt of document.getElementsByClassName('key'))
+        if (!elt.classList.contains('wide'))
+            elt.setAttribute('match', letter_states[elt.innerText]);
 }
 
 function handle_key(key) {
@@ -271,22 +299,19 @@ function handle_key(key) {
     if (guesses.length > 0 && guesses[guesses.length - 1] === word_of_the_day)
         return;
 
-    if (HEBREW_LETTERS.indexOf(key) !== -1)
-        type_letter(key);
-    else if (HEBREW_KEYBOARD.indexOf(key) !== -1)
-        type_letter(HEBREW_LETTERS[HEBREW_KEYBOARD.indexOf(key)]);
     else if (key === 'Backspace')
         erase_letter();
     else if (key === 'Enter')
         make_guess();
+    else if (HEBREW_KEYMAP.hasOwnProperty(key))
+        type_letter(HEBREW_KEYMAP[key]);
 }
 
 function handle_on_screen_keyboard_click(event) {
-    const letter = event.currentTarget.innerText;
-    if (letter.length === 1 && HEBREW_LETTERS.indexOf(letter) !== -1)
-        handle_key(letter);
-    else
+    if (event.currentTarget.classList.contains('wide'))
         handle_key(event.currentTarget.getAttribute('value'));
+    else
+        handle_key(event.currentTarget.innerText);
 }
 
 function save_to_local_storage() {

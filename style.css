@@ -123,14 +123,14 @@ body {
     margin-bottom: calc(min(2vw, 1.2vh));
 }
 .keyboard-row {
-    margin-bottom: calc(min(0.7vw, 0.42vh));
+    margin-bottom: calc(min(1vw, 0.6vh));
     display: flex;
     flex-direction: row;
-    gap: calc(min(0.4vw, 0.24vh));
+    gap: calc(min(0.7vw, 0.42vh));
 }
 .key {
     display: inline-block;
-    width: calc(min(8.5vw, 5.1vh));
+    width: calc(min(9vw, 5.4vh));
     height: calc(min(12vw, 7.2vh));
     border-radius: calc(min(1vw, 0.5vh));
     background-color: lightgray;
@@ -153,16 +153,16 @@ body {
     background-color: gray;
 }
 .key.wide {
-    width: calc(min(12vw, 7.2vh));
+    width: calc(min(18vw, 10.8vh));
     flex-direction: column;
     font-weight: normal;
     font-size: 1.8vh;
 }
 .key > svg {
-    width: calc(min(6vw, 3.6vh));
+    width: calc(min(7vw, 4.2vh));
 }
 .keyboard-row:nth-child(2) > .key:first-child {
-    margin-right: calc(min(7vw, 4.2vh));
+    margin-right: calc(min(15vw, 9vh));
 }
 
 #popup {
