@@ -45,7 +45,10 @@ const HEBREW_KEYMAP = {
 const FINAL_LETTERS = {'ך': 'כ', 'ם': 'מ', 'ן': 'נ', 'ף': 'פ', 'ץ': 'צ'};
 const FINALED_LETTERS = {'כ': 'ך', 'מ': 'ם', 'נ': 'ן', 'פ': 'ף', 'צ': 'ץ'};
 const today = get_date();
-const word_of_the_day = FREQUENT_WORDS[cyrb53('meduyeket ' + today) % FREQUENT_WORDS.length];
+const word_of_the_day =
+    today === '16.1.2022'
+        ? 'מעטפת'
+        : FREQUENT_WORDS[cyrb53('meduyeket ' + today) % FREQUENT_WORDS.length];
 let guesses = [];
 
 
