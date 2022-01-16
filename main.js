@@ -113,11 +113,18 @@ function show_success_screen() {
     set_modal_state();
 }
 
+let showed_failure_popup = false;
 function copy_result(event) {
     event.stopPropagation();
+    console.log(event.target.id === 'result');
     navigator.clipboard.writeText(document.getElementById('result').innerHTML)
         .then(function() {popup('התוצאה הועתקה, אפשר להדביק עם Ctrl+V');})
-        .catch(function() {popup('לא עבד, נסו לסמן את הטקסט ולהעתיק');});
+        .catch(function() {
+            if (!showed_failure_popup || event.target.id !== 'result') {
+                showed_failure_popup = true;
+                popup('לא עבד, נסו לסמן את הטקסט ולהעתיק ידנית');
+            }
+        });
 }
 
 function countdown() {
