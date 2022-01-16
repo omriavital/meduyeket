@@ -114,6 +114,7 @@ function set_modal_state() {
             document.getElementById('modal').classList.add('hidden');
     }
 }
+
 function show_help() {
     if (history.state !== 'help') {
         if (history.state === 'success')
@@ -354,6 +355,8 @@ function load_from_local_storage() {
         window.setTimeout(show_success_screen, 500);
     }
     set_keyboard_key_colors();
+    document.getElementById('final-letters-warning').style.display = 'block';
+    window.setTimeout(function() {document.getElementById('final-letters-warning').style.opacity = 1;}, 1500);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -377,6 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
         elt.addEventListener('click', handle_on_screen_keyboard_click);
     set_modal_state();
     window.addEventListener('popstate', set_modal_state);
+    document.getElementById('final-letters-warning').addEventListener('click', function() {document.getElementById('final-letters-warning').style.display = 'none'});
 });
 
 // console.log('While debugging, the following command clears the saved guesses:')
