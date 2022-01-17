@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('share-button').addEventListener('click', copy_result);
     document.getElementById('modal').addEventListener('click', hide_modal);
     document.body.addEventListener('keydown', function(event) {
-        if (event.ctrlKey || event.altKey)
+        if (event.ctrlKey || event.altKey || event.metaKey)
             return;
 
         if (event.key === '?')
