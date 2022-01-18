@@ -102,6 +102,7 @@ function set_modal_state() {
             document.getElementById('help-screen').classList.remove('hidden');
             document.getElementById('help-screen').scrollTop = 0;
             document.getElementById('success-screen').classList.add('hidden');
+            document.getElementById('popup').classList.add('hidden');
             break;
 
         case 'success':
