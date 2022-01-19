@@ -8,4 +8,4 @@
 
 ## נסו את המשחק!
 
-[<p align="center"><img src="screenshot.png"></p>](https://meduyeket.net/)
+[<p align="center"><img src="https://meduyeket.net/screenshot.png"></p>](https://meduyeket.net/)
